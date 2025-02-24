@@ -43,6 +43,13 @@ public class EmployeeService {
             throw new RuntimeException("Employee not found");
         }
     }
+    // Find employee by name (added business logic here)
+    public Employee getEmployeeByName(String name) {
+        return repository.findAll().stream()
+                .filter(employee -> employee.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+    }
 }
 
 

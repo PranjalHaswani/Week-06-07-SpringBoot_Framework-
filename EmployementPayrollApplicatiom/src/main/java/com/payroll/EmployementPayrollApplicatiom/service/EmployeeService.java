@@ -1,6 +1,6 @@
 package com.payroll.EmployementPayrollApplicatiom.service;
 
-
+import com.payroll.EmployementPayrollApplicatiom.DTO.EmployeeDTO;
 import com.payroll.EmployementPayrollApplicatiom.model.Employee;
 import com.payroll.EmployementPayrollApplicatiom.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
@@ -37,5 +37,14 @@ public class EmployeeService {
 
     public void deleteEmployee(Long id) {
         repository.deleteById(id);
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+        } else {
+            throw new RuntimeException("Employee not found");
+        }
     }
 }
+
+
+
+

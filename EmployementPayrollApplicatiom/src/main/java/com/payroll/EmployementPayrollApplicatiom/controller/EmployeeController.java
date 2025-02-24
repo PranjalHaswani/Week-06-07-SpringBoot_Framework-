@@ -1,6 +1,7 @@
 package com.payroll.EmployementPayrollApplicatiom.controller;
 
 
+import com.payroll.EmployementPayrollApplicatiom.DTO.EmployeeDTO;
 import com.payroll.EmployementPayrollApplicatiom.model.Employee;
 import com.payroll.EmployementPayrollApplicatiom.repository.EmployeeRepository;
 import com.payroll.EmployementPayrollApplicatiom.service.EmployeeService;
@@ -45,4 +46,26 @@ public class EmployeeController {
     public void deleteEmployee(@PathVariable Long id) {
         service.deleteEmployee(id);
     }
+
+    // Updated endpoint to use DTO for creating employee
+    @PostMapping("/create")
+    public EmployeeDTO createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        Employee employee = employeeDTO.toEmployee();
+        Employee savedEmployee = service.addEmployee(employee);
+        return EmployeeDTO.fromEmployee(savedEmployee);
+    }
+
+    // Endpoint to retrieve employee details by name
+    @GetMapping("/get/{name}")
+    public EmployeeDTO getEmployee(@PathVariable String name) {
+        Employee employee = service.getAllEmployees().stream()
+                .filter(e -> e.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
+        if (employee == null) {
+            throw new RuntimeException("Employee not found");
+        }
+        return EmployeeDTO.fromEmployee(employee);
+    }
+
 }

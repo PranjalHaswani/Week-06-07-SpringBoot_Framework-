@@ -1,13 +1,17 @@
 package com.payroll.EmployementPayrollApplicatiom;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EmployementPayrollApplicatiomApplication {
+@Slf4j
+public class EmployementPayrollApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EmployementPayrollApplicatiomApplication.class, args);
-	}
 
+		SpringApplication.run(EmployementPayrollApplication.class, args);
+
+		log.info("Employee payroll App Started");
+	}
 }

@@ -118,7 +118,6 @@ public class EmployeeController {
 
     // Create a new employee using DTO (EmployeeDTO)
     @PostMapping("/create")
-
     //Section-04(Data validation by using @Valid))UC-01
     public EmployeeDTO createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
         log.info("POST request received to create a new employee using DTO.");

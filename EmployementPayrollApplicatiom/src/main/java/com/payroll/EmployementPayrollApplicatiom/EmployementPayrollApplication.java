@@ -14,7 +14,7 @@ public class EmployementPayrollApplication {
 	//	SpringApplication.run(EmployementPayrollApplication.class, args);
 		ApplicationContext context= SpringApplication.run(EmployementPayrollApplication.class, args);
     //Section-03 UC2 (Lombok For Logging)
-	//	log.info("Employee payroll App Started Environment");
+	//log.info("Employee payroll App Started Environment");
 
 		//Section-03 UC3 (determine the logging)
 		log.info("Employee Payroll App Started in {} Environment", context.getEnvironment(). getProperty("environment"));

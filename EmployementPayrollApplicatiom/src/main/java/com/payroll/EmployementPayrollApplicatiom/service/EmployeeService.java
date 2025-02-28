@@ -101,4 +101,10 @@ public Employee addEmployee(Employee employee) {
         }
         employeeRepository.deleteById(id); // Delete from DB
     }
+
+    // Method to get all employees in the Sales department
+    public List<Employee> getEmployeesInSalesDepartment() {
+        return employeeRepository.findEmployeesInSalesDepartment();
+    }
+
 }

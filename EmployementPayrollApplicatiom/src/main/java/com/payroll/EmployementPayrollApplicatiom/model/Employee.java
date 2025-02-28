@@ -5,79 +5,53 @@ import lombok.Data;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "employee")
-public @Data class Employee {
-
-    //Section-05(Using MySQL Repository to store Employee Payroll Data)
+@Data
+public class Employee {
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_id")
     private Long id;
+
+    @Column(name = "name")
     @Setter
     private String name;
-    @Setter
-    private String department;
+
     @Setter
     private double salary;
+
     @Setter
     private String gender;
+
     private LocalDate startDate;
+
     @Setter
     private String note;
+
     @Setter
     private String profilePic;
 
+    @ElementCollection
+    @CollectionTable(name = "employee_department", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "department")
+    @Setter
+    private List<String> department;
 
-    // No-argument constructor (default)
     public Employee() {
     }
 
-    // Parameterized constructor
-    public Employee(Long id, String name, String department, double salary) {
+    public Employee(Long id, String name, List<String> department, double salary, LocalDate startDate, String gender, String note, String profilePic) {
         this.id = id;
         this.name = name;
         this.department = department;
         this.salary = salary;
-        this.gender= gender;
-        this.startDate= startDate;
-        this.note= note;
-        this.profilePic= profilePic;
+        this.startDate = startDate;
+        this.gender = gender;
+        this.note = note;
+        this.profilePic = profilePic;
     }
-
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public String getProfilePic() {
-        return profilePic;
-    }
-
 }
-

@@ -104,6 +104,12 @@ public class EmployeeController {
         service.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    // Endpoint to get all employees in the Sales department
+    @GetMapping("/sales")
+    public List<Employee> getEmployeesInSalesDepartment() {
+        return service.getEmployeesInSalesDepartment();
+    }
 }
 
 

@@ -1,9 +1,8 @@
 package com.payroll.EmployementPayrollApplicatiom.DTO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.payroll.EmployementPayrollApplicatiom.model.Employee;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,15 +20,21 @@ public @ToString class EmployeeDTO {
     @NotEmpty(message = "Employee name cannot be null")
     @Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s](2,)$", message = "Employee name Invalid")
     public String name;
-    @NotEmpty(message = "Department cannot be null or empty")
+   @NotEmpty(message = "Department cannot be null or empty")
     private List<String> department;
     @Min(value = 500, message = "Min Wage should be more than 500")
     private double salary;
 
     //Section-05(Using MySQL Repository to store Employee Payroll Data)
+    @Pattern(regexp = "male|female", message = "Gender needs to be male or female")
     private String gender;
+    @JsonFormat(pattern = "dd MMM yyyy")
+    @NotNull(message = "startDate should not be empty")
+    @PastOrPresent(message = "startDate should be past or todays date")
     private String startDate;
+    @NotBlank(message = "Note cannot be empty")
     private String note;
+    @NotBlank(message = "profilePic cannot be empty")
     private String profilePic;
 
     // Convert EmployeeDTO to Employee
@@ -43,7 +48,7 @@ public @ToString class EmployeeDTO {
     public static EmployeeDTO fromEmployee(Employee employee) {
         // Assuming Employee has a 'department' as a string, splitting it into a list
         List<String> departments = List.of(employee.getDepartment().split(", "));
-        return new EmployeeDTO(employee.getName(), departments, employee.getSalary(), "female", "27 Feb", null, null);
+        return new EmployeeDTO(employee.getName(), departments, employee.getSalary(), "female", "27 Dec 2024", "new hire", null);
     }
 
 }

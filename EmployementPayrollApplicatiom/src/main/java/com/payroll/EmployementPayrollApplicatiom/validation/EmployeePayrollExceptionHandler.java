@@ -9,6 +9,7 @@ import com.payroll.EmployementPayrollApplicatiom.model.ErrorResponse;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,8 @@ import java.util.List;
 @Slf4j
 public class EmployeePayrollExceptionHandler {
     private static final String message = "Exception while processing REST Request";
-//Section-05(Json-Format)UC2
+
+    //Section-05(Json-Format)UC2
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(
             HttpMessageNotReadableException exception) {
@@ -45,7 +47,8 @@ public class EmployeePayrollExceptionHandler {
         // Return a BAD_REQUEST (400) response with the error message and details
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
-//
+
+    //
 //    // Handle general exceptions
 //    @ExceptionHandler(Exception.class)
 //    public ResponseEntity<ErrorResponse> handleGeneralExceptions(Exception ex) {
@@ -57,19 +60,22 @@ public class EmployeePayrollExceptionHandler {
     //Section-04(Throw User friendly Exception) UC-03
     // Define the global exception handler
     // Handle EmployeeNotFoundException
-@ExceptionHandler(EmployeeNotFoundException.class)
-public ResponseEntity<ErrorResponse> handleEmployeeNotFoundException(EmployeeNotFoundException ex) {
-    String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Employee Not Found";
-
-    // Create a user-friendly error response
-    ErrorResponse errorResponse = new ErrorResponse(
-            "Employee Not Found",  // general message
-            List.of(errorMessage)  // specific message in a list
-    );
-
-    return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-}
-
-}
+//@ExceptionHandler(EmployeeNotFoundException.class)
+//public ResponseEntity<ErrorResponse> handleEmployeeNotFoundException(EmployeeNotFoundException ex) {
+//    String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Employee Not Found";
+//
+//    // Create a user-friendly error response
+//    ErrorResponse errorResponse = new ErrorResponse(
+//            "Employee Not Found",  // general message
+//            List.of(errorMessage)  // specific message in a list
+//    );
+//
+//    return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+//}
+        @ExceptionHandler(EmployeeNotFoundException.class)
+        public ResponseEntity<String> handleEmployeeNotFound(EmployeeNotFoundException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 
 

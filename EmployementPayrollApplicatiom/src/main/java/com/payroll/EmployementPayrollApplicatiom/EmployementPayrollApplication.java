@@ -11,15 +11,16 @@ public class EmployementPayrollApplication {
 
 	public static void main(String[] args) {
 
-	//	SpringApplication.run(EmployementPayrollApplication.class, args);
-		ApplicationContext context= SpringApplication.run(EmployementPayrollApplication.class, args);
-    //Section-03 UC2 (Lombok For Logging)
-	//log.info("Employee payroll App Started Environment");
+		//	SpringApplication.run(EmployementPayrollApplication.class, args);
+		ApplicationContext context = SpringApplication.run(EmployementPayrollApplication.class, args);
+		//Section-03 UC2 (Lombok For Logging)
+		//log.info("Employee payroll App Started Environment");
 
 		//Section-03 UC3 (determine the logging)
-		log.info("Employee Payroll App Started in {} Environment", context.getEnvironment(). getProperty("environment"));
+		log.info("Employee Payroll App Started in {} Environment", context.getEnvironment().getProperty("environment"));
 
 		//SECTION-03 UC4 (Database setting as environment variable)
 		log.info("Employee Payroll DB User is {} ", context.getEnvironment().getProperty("spring.datasource.username"));
 	}
+
 }
